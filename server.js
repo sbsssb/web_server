@@ -2,6 +2,9 @@ const express = require('express');
 const db = require('./db');
 const productRouter = require('./routes/product');
 const userRouter = require('./routes/user');
+const loginRouter = require('./routes/login');
+const studentRouter = require('./routes/student');
+
 var session = require('express-session')
 
 const cors = require('cors');
@@ -27,6 +30,8 @@ app.use(session({
 
 app.use("/product", productRouter);
 app.use("/user", userRouter);
+app.use("/login", loginRouter);
+app.use("/student", studentRouter);
 
 app.use('/uploads', express.static('uploads'));
 

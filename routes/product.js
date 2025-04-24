@@ -2,6 +2,7 @@ const express = require('express');
 const multer  = require('multer')
 const upload = multer({ dest: 'uploads/' })
 const db = require('../db');
+const authMiddleware = require('../auth')
 const router = express.Router();
 
 
@@ -77,7 +78,8 @@ router.post("/", upload.single('file'), async (req, res) => {
     }
 })
 
-router.delete("/:productId", async (req, res) => {
+// authMiddleware 추가 -> 삭제 요청했을 때 authMiddleware 먼저 실행됨
+router.delete("/:productId", authMiddleware, async (req, res) => {
     let {productId} = req.params;
     console.log(productId);
     try {
