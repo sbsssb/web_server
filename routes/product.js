@@ -6,11 +6,28 @@ const authMiddleware = require('../auth')
 const router = express.Router();
 
 
+// router.get("/", async (req, res) => {
+//     let {pageSize, offset} = req.query;
+//     try {
+//         let sql = "SELECT * FROM TBL_PRODUCT LIMIT ? OFFSET ?";
+//         let [list] = await db.query(sql, [parseInt(pageSize), parseInt(offset)]);
+//         let [count] = await db.query("SELECT COUNT(*) AS cnt FROM TBL_PRODUCT");
+        
+//         res.json({
+//             message : "result",
+//             list : list,
+//             count : count[0].cnt
+//         });
+//     } catch (error) {
+//         console.log("에러 발생");
+//         res.status(500).send("Server Error");
+//     }
+// })
+
 router.get("/", async (req, res) => {
-    let {pageSize, offset} = req.query;
     try {
-        let sql = "SELECT * FROM TBL_PRODUCT LIMIT ? OFFSET ?";
-        let [list] = await db.query(sql, [parseInt(pageSize), parseInt(offset)]);
+        let sql = "SELECT * FROM TBL_PRODUCT";
+        let [list] = await db.query(sql);
         let [count] = await db.query("SELECT COUNT(*) AS cnt FROM TBL_PRODUCT");
         
         res.json({
